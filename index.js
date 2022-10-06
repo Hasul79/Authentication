@@ -6,6 +6,10 @@ const bcrypt = require("bcrypt");
 const jsonparser = bodyparser.json()
 const app = express()
 const port = 3000
+require('dotenv').config()
+
+
+let SECRET = process.env.SECRET
 
 app.use(jsonparser)
 
@@ -19,7 +23,7 @@ app.get('/', authenticateToken, (req, res) => {
 
 //----------------------------------------------------------
 
-const SECRET = "somerandomsecret"
+
 function generateAccessToken(username) {
     return jwt.sign(username, SECRET, { expiresIn: '36000s' });
 }
